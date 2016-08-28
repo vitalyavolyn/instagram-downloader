@@ -2,7 +2,7 @@
 Simple python Instagram downloader, no access_token needed
 
 # Usage
-```{r, engine='bash', count_lines}
+```
 python3 instagram-downloader.py https://www.instagram.com/p/BJnQrhtDc9z/
 Downloaing vitalyavolyn's photo
 Dimensions: 1080x806
