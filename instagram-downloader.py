@@ -15,7 +15,7 @@ def download(url,local_filename):
 def main():
     url = argv[1]
     r = requests.get(url, params={'__a':1})
-=    if r.headers['content-type'] != 'application/json':
+    if r.headers['content-type'] != 'application/json':
         raise Exception('wrong link')
     if r.json()['media']['is_video']:
         print('Saved as ' + download(r.json()['media']['video_url'],r.json()['media']['code'] + '.mp4') + '!')
