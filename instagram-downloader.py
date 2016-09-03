@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import requests
 import os
 from sys import argv
@@ -13,12 +14,13 @@ def download(url,local_filename):
 
 def main():
     url = argv[1]
-    r = requests.get(url + '?__a=1')
-    if r.headers['content-type'] != 'application/json':
+    r = requests.get(url, params={'__a':1})
+=    if r.headers['content-type'] != 'application/json':
         raise Exception('wrong link')
-    print('Downloaing ' + r.json()['media']['owner']['username'] + '\'s photo')
-    print('Dimensions: ' + str(r.json()['media']['dimensions']['width']) + 'x' + str(r.json()['media']['dimensions']['height']))
-    print('Saved as ' + download(r.json()['media']['display_src'],r.json()['media']['code'] + '.jpg') + '!')
+    if r.json()['media']['is_video']:
+        print('Saved as ' + download(r.json()['media']['video_url'],r.json()['media']['code'] + '.mp4') + '!')
+    else:
+        print('Saved as ' + download(r.json()['media']['display_src'],r.json()['media']['code'] + '.jpg') + '!')
 
 if __name__ == '__main__':
   main()
