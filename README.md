@@ -1,5 +1,5 @@
 # instagram-downloader
-Simple python Instagram downloader, no access_token needed
+Simple python Instagram video/images downloader, no access_token needed
 
 # Usage
 ```
