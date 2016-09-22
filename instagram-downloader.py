@@ -23,4 +23,7 @@ def main():
         print('Saved as ' + download(r.json()['media']['display_src'],r.json()['media']['code'] + '.jpg') + '!')
 
 if __name__ == '__main__':
-  main()
+    if len(argv) == 2:
+        main()
+    else:
+        print('Usage: instagram-downloader.py link_to_photo')
