@@ -3,7 +3,6 @@ import requests
 import os
 from sys import argv
 
-
 def download(url, local_filename):
     r = requests.get(url, stream=True)
     with open(os.getcwd()+"/"+local_filename, 'wb') as f:
@@ -13,12 +12,15 @@ def download(url, local_filename):
                 f.flush()
     return local_filename
 
-
 def main():
     url = argv[1]
     r = requests.get(url, params={'__a': 1})
-    if r.headers['content-type'] != 'application/json':
-        raise Exception('wrong link')
+    if (
+        (r.headers['content-type'] != 'application/json') or
+        (not 'media' in r.json())
+    ):
+        raise Exception('Wrong link')
+
     if r.json()['media']['is_video']:
         print('Saved as ' + download(r.json()['media']['video_url'],
                                      r.json()['media']['code'] + '.mp4') + '!')
