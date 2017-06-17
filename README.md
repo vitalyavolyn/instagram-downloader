@@ -5,6 +5,7 @@ Simple python Instagram video/images downloader, no access_token needed
 
 # Usage
 ```
-$ python3 instagram-downloader.py https://instagram.com/p/BRdwSlFg1QX/
-Saved as BRdwSlFg1QX.jpg!
+$ wget 'https://raw.githubusercontent.com/vitalyavolyn/instagram-downloader/master/instagram-downloader.py'
+$ chmod +x instagram-downloader.py
+$ ./instagram-downloader.py https://instagram.com/p/BRdwSlFg1QX/
 ```
