@@ -17,16 +17,23 @@ def main():
     r = requests.get(url, params={'__a': 1})
     if (
         (r.headers['content-type'] != 'application/json') or
-        (not 'media' in r.json())
+        (not 'graphql' in r.json())
     ):
         raise Exception('Wrong link')
 
-    if r.json()['media']['is_video']:
-        print('Saved as ' + download(r.json()['media']['video_url'],
-                                     r.json()['media']['code'] + '.mp4') + '!')
+    media = r.json()['graphql']['shortcode_media']
+    if media['is_video']:
+        print('Saved as ' + download(media['video_url'],
+                                     media['shortcode'] + '.mp4') + '!')
     else:
-        print('Saved as ' + download(r.json()['media']['display_src'],
-                                     r.json()['media']['code'] + '.jpg') + '!')
+        if media.get('edge_sidecar_to_children',None):
+            print 'Downloading mutiple images of this post'
+            for child_node in media['edge_sidecar_to_children']['edges']:
+                print('Saved as ' + download(child_node['node']['display_url'],
+                                             child_node['node']['shortcode'] + '.jpg') + '!')
+        else:
+            print('Saved as ' + download(media['display_url'],
+                                         media['shortcode'] + '.jpg') + '!')
 
 if __name__ == '__main__':
     if len(argv) == 2:
