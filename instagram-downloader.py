@@ -27,7 +27,7 @@ def main():
                                      media['shortcode'] + '.mp4') + '!')
     else:
         if media.get('edge_sidecar_to_children',None):
-            print 'Downloading mutiple images of this post'
+            print('Downloading mutiple images of this post')
             for child_node in media['edge_sidecar_to_children']['edges']:
                 print('Saved as ' + download(child_node['node']['display_url'],
                                              child_node['node']['shortcode'] + '.jpg') + '!')
